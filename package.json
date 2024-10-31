@@ -1,0 +1,17 @@
+{
+  "name": "Lidor-TopQ-Automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.48.2",
+    "playwright": "^1.48.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
