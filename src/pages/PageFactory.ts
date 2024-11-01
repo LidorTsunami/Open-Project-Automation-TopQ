@@ -1,8 +1,9 @@
 import { Page } from 'playwright';
-import { OrgNameSignInPage } from './OrgNameSignInPage';
-import { SignInPage } from './SignInPage';
-import { HomePage } from './HomePage';
-import { WorkspacePage } from './WorkspacePage';
+import { OrgNameSignInPage } from './OrgNameSignIn/OrgNameSignInPage';
+import { SignInPage } from './SignInPage/SignInPage';
+import { HomePage } from './HomePage/HomePage';
+import { WorkspacePage } from './WorkSpace/WorkspacePage';
+import {NavigationMenu} from "./NavigationMenu/NavigationMenu";
 
 export class PageFactory {
     private readonly page: Page;
@@ -11,19 +12,23 @@ export class PageFactory {
         this.page = page;
     }
 
-    createOrgNameSignInPage() {
+    createOrgNameSignInPage(): OrgNameSignInPage {
         return new OrgNameSignInPage(this.page);
     }
 
-    createSignInPage() {
+    createSignInPage(): SignInPage {
         return new SignInPage(this.page);
     }
 
-    createHomePage() {
+    createHomePage(): HomePage {
         return new HomePage(this.page);
     }
 
-    createWorkspacePage() {
+    createWorkspacePage(): WorkspacePage {
         return new WorkspacePage(this.page);
+    }
+
+    CreateNavigationMenuPage(): NavigationMenu {
+        return new NavigationMenu(this.page);
     }
 }

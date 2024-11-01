@@ -2,12 +2,13 @@ import { Page } from 'playwright';
 
 export class BasePage {
     protected page: Page;
+    readonly url = "https://www.openproject.org/signin/"
 
     constructor(page: Page) {
         this.page = page;
     }
 
-    async goto(url: string) {
-        await this.page.goto(url);
+    async goToOrgSignInPage() {
+        await this.page.goto(this.url);
     }
 }
