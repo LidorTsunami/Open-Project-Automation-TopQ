@@ -1,10 +1,7 @@
 import {expect} from "@playwright/test";
 import {test} from "../utils/fixtures"
 
-test('Add new Task and Filter it', async ({pageHolder}) => {
-    await pageHolder.orgNameSignInPage.goToOrgSignInPage();
-    await pageHolder.orgNameSignInPage.signIn();
-    await pageHolder.signInPage.signIn();
+test('Add new Task and Filter it', async ({pageHolder, homepage}) => {
     await pageHolder.homePage.openProjects();
     await pageHolder.homePage.selectProjectDemo();
     await pageHolder.navigationPage.enterWorkSpaces()
