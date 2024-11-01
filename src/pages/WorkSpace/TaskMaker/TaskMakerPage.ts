@@ -9,7 +9,7 @@ export class TaskMakerPage extends BasePage {
     }
 
     async addTask(taskName: string) {
-        await this.page.fill(this.locators.taskNameInput, taskName);
+        await this.page.locator(this.locators.taskNameInput).first().fill(taskName);
         await this.page.click(this.locators.saveButton);
     }
 
