@@ -14,6 +14,7 @@ export const test = base.extend<{
         const context: BrowserContext = await browser.newContext();
         const page: Page = await context.newPage();
         await use(page);
+        await page.waitForTimeout(2000);
         const workspacePage = new WorkspacePage(page);
         await workspacePage.deleteFilteredTask();
         await page.close();

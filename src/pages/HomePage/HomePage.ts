@@ -16,10 +16,6 @@ export class HomePage extends BasePage {
         this.signInPage = new SignInPage(page);
     }
 
-    async open() {
-        await this.page.goto(this.url);
-    }
-
     async openProjects() {
         await this.page.click(this.locators.projectsMenu);
     }
