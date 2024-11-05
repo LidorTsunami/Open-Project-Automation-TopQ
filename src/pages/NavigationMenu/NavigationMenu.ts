@@ -1,13 +1,13 @@
 import { BasePage } from '../BasePage';
 import {Page} from "@playwright/test";
-import {NavigationMenuLocators} from "./NavigationMenuLocators";
+import {WorkspacePage} from "../WorkSpace/WorkspacePage";
 
 export class NavigationMenu extends BasePage {
-    locators = new NavigationMenuLocators()
     constructor(page: Page) {
         super(page);
     }
-    async enterWorkSpaces(){
-        await this.page.click(this.locators.workSpaces);
+    async enterWorkSpaces(): Promise<WorkspacePage> {
+        await this.page.click("#main-menu-work-packages span span");
+        return new WorkspacePage(this.page);
     }
 }

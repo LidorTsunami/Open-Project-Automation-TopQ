@@ -1,11 +1,20 @@
-import { BasePage } from '../BasePage';
-import {SignInLocators} from "./SignInLocators";
+import { Page } from 'playwright';
+import { HomePage } from "../HomePage/HomePage";
 
-export class SignInPage extends BasePage {
-    locators = new SignInLocators()
-    async signIn() {
-        await this.page.fill(this.locators.usernameField, "lidor280006@gmail.com");
-        await this.page.fill(this.locators.passwordField, "L123456789");
-        await this.page.click(this.locators.signInButton);
+export class SignInPage {
+    private readonly page: Page;
+
+    constructor(page: Page) {
+        this.page = page;
+    }
+
+    async enterCredentials(username: string, password: string) {
+        await this.page.fill("#username", username);
+        await this.page.fill("#password", password);
+    }
+
+    async submitLogin(): Promise<HomePage> {
+        await this.page.click("//*[@id='login-form']/form/div[3]/input");
+        return new HomePage(this.page);
     }
 }

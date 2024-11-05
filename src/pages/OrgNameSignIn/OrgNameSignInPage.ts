@@ -1,10 +1,23 @@
-import { BasePage } from '../BasePage';
-import {OrgNamePageLocators} from "./OrgNamePageLocators";
+import { Page } from 'playwright';
+import { SignInPage } from '../SignInPage/SignInPage';
 
-export class OrgNameSignInPage extends BasePage {
-    locators = new OrgNamePageLocators()
-    async signIn() {
-        await this.page.fill(this.locators.SignInInput, "LidorAutomation");
-        await this.page.click(this.locators.SignInButton);
+export class OrgSignInPage {
+    private readonly page: Page;
+
+    constructor(page: Page) {
+        this.page = page;
+    }
+
+    async goTo() {
+        await this.page.goto("https://www.openproject.org/signin/");
+    }
+
+    async enterOrganizationName(orgName: string) {
+        await this.page.fill("#signin-input", orgName);
+    }
+
+    async submitOrganizationLogin(): Promise<SignInPage> {
+        await this.page.click("//*[@id='signin']/input");
+        return new SignInPage(this.page);
     }
 }

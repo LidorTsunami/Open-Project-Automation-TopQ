@@ -1,19 +1,24 @@
-import { BasePage } from '../../BasePage';
-import { Page } from "@playwright/test";
-import {TaskMakerLocators} from "./TaskMakerLocators";
+import { Page } from 'playwright';
 
-export class TaskMakerPage extends BasePage {
-    locators = new TaskMakerLocators()
+export class TaskMakerPage {
+    private page: Page;
+
     constructor(page: Page) {
-        super(page);
+        this.page = page;
     }
 
-    async addTask(taskName: string) {
-        await this.page.locator(this.locators.taskNameInput).first().fill(taskName);
-        await this.page.click(this.locators.saveButton);
+    async openNewTask(): Promise<TaskMakerPage> {
+        await this.page.click("button.-primary.add-work-package");
+        await this.page.click("a[role='menuitem']:has(span:text('Task'))");
+        return this;
     }
 
-    async getTaskText() {
-        return this.page.locator(this.locators.resultsContainer).getAttribute('title');
+    async fillTaskSubject(subject: string): Promise<TaskMakerPage> {
+        await this.page.locator("#wp-new-inline-edit--field-subject").first().fill(subject);
+        return this;
+    }
+
+    async saveTask(){
+        await this.page.click("#work-packages--edit-actions-save");
     }
 }

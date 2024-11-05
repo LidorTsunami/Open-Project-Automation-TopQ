@@ -1,32 +1,16 @@
-import { BasePage } from '../BasePage';
-import { HomePageLocators } from "./HomePageLocators";
-import {SignInPage} from "../SignInPage/SignInPage";
-import {OrgNameSignInPage} from "../OrgNameSignIn/OrgNameSignInPage";
-import {Page} from "@playwright/test";
+import { Page } from 'playwright';
+import { NavigationMenu } from '../NavigationMenu/NavigationMenu';
 
-
-export class HomePage extends BasePage {
-    locators = new HomePageLocators();
-    orgNameSignInPage: OrgNameSignInPage;
-    signInPage: SignInPage;
+export class HomePage {
+    private readonly page: Page;
 
     constructor(page: Page) {
-        super(page);
-        this.orgNameSignInPage = new OrgNameSignInPage(page);
-        this.signInPage = new SignInPage(page);
+        this.page = page;
     }
 
-    async openProjects() {
-        await this.page.click(this.locators.projectsMenu);
-    }
-
-    async selectProjectDemo() {
-        await this.page.click(this.locators.demoProject);
-    }
-
-    async signIn() {
-        await this.page.goto(this.url);
-        await this.orgNameSignInPage.signIn();
-        await this.signInPage.signIn();
+    async openDemoProject(): Promise<NavigationMenu> {
+        await this.page.click("#projects-menu");
+        await this.page.click("span[data-test-selector='op-header-project-select--item-title'] span");
+        return new NavigationMenu(this.page);
     }
 }
